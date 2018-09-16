@@ -1,0 +1,20 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+<table>
+  <tr>
+      <th>
+          <label>Load Users:
+              <button (click)="getUsers()">Get All Users(DB)</button>
+          </label>
+      </th>
+  </tr>
+</table>
+<table>
+  <tr *ngFor="let user of Users | async">
+      <td>{{user}}</td>
+  </tr>
+</table>

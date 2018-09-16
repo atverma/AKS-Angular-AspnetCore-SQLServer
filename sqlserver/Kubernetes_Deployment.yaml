@@ -1,0 +1,32 @@
+﻿apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: mssql-sample-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mssql-sample
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: mssql
+        image: microsoft/mssql-server-linux
+        ports:
+        - containerPort: 1433
+        env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: SA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mssql-sample-secret
+              key: SA_PASSWORD
+        volumeMounts:
+        - name: mssql-persistent-storage
+          mountPath: /var/opt/mssql
+      volumes:
+      - name: mssql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mssql-sample-data-claim

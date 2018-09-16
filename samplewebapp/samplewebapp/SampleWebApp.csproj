@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <DockerTargetOS>Linux</DockerTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+    <Folder Include="Database\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.0.1916590" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Dockerfile" />
+    <None Remove="Docker Commands.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Database\SQLHelper.cs" />
+  </ItemGroup>
+</Project>

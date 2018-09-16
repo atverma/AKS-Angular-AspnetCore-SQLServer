@@ -1,0 +1,32 @@
+﻿apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: samplewebapp
+  namespace: default
+  labels:
+    app: samplewebapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: samplewebapp
+  template:
+    metadata:
+      name: samplewebapp
+      labels:
+        app: samplewebapp
+    spec:
+      containers:
+      - name: samplewebapp
+        image: atverma/samplewebapp
+        resources: {}
+        terminationMessagePath: "/dev/termination-log"
+        terminationMessagePolicy: File
+        imagePullPolicy: Always
+        securityContext:
+          privileged: false
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler

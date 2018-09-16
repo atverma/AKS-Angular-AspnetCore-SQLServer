@@ -1,0 +1,29 @@
+Steps to pubish Docker Image:
+
+1. Create a Docker Hub Repository for this sample.
+
+2. Create a Docker Image by running command
+
+           docker build  -t sampleangularapp .
+
+3. Tag Docker Image: Please update xyz/sampleangularapp with name of your docker repository.
+
+           docker tag sampleangularapp atverma/sampleangularapp
+
+4. Publish to Docker Hub: Please update xyz/sampleangularapp with name of yur docker repository.
+
+            docker push atverma/sampleangularapp
+
+5. Update docker image path in Kubernetes_Deployment.yaml to
+
+            image: xyz/sampleangularapp
+
+6. Create Kubernetes Service
+
+7. Create Kubernetes Deployment
+
+8. Once Kubernetes Service deployment is complete get External endpoints for this service from AKS dashboard or run kubectl 
+command displayed below to get Loadbalancer ingress IP. This external endpoint/loadbalancer ingress is going to be used by Angular
+App to connect to web api.
+
+            kubectl describe services samplewebapp
