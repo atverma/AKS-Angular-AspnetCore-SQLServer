@@ -18,3 +18,5 @@ The components and steps needed to deploy these to AKS are
   ◦ Create a docker image
   ◦ Publish docker image to Docker Hub
   ◦ Deploy to AKS
+
+You can read in detail by going through this article https://blogs.msdn.microsoft.com/atverma/2018/09/16/azure-kubernetes-service-aks-deploying-angular-asp-net-core-and-sql-server-on-linux/
