@@ -19,6 +19,12 @@ spec:
       containers:
       - name: samplewebapp
         image: atverma/samplewebapp
+        env:
+        - name: DatabaseConnectionString
+          valueFrom:
+            configMapKeyRef:
+              name: samplewebapp-configmap
+              key: DatabaseConnectionString
         resources: {}
         terminationMessagePath: "/dev/termination-log"
         terminationMessagePolicy: File
@@ -30,3 +36,16 @@ spec:
       dnsPolicy: ClusterFirst
       securityContext: {}
       schedulerName: default-scheduler
+      
+      
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: samplewebapp-configmap
+  namespace: default
+data:
+  DatabaseConnectionString: DatabaseConnectionStringFromConfigMap
+  AnotherSetting: test
+  Another: abc

@@ -36,6 +36,7 @@ namespace SampleWebApp
             });
 
             services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"));
+            services.Configure<AppConfiguration>(Configuration);
 
             services.AddTransient<IUserContext, UserContext>();
 
@@ -54,16 +55,16 @@ namespace SampleWebApp
 
             app.UseCors("CorsPolicy");
 
-            using (var serviceScope = app.ApplicationServices.CreateScope())
-            {
-                using (var context = serviceScope.ServiceProvider.GetService<UserContext>())
-                {
-                    // context.Database.EnsureDeleted();
-                    context.Database.EnsureCreated();
-                    context.Database.Migrate();
-                    context.EnsureSeedData();
-                }
-            }
+            //using (var serviceScope = app.ApplicationServices.CreateScope())
+            //{
+            //    using (var context = serviceScope.ServiceProvider.GetService<UserContext>())
+            //    {
+            //        // context.Database.EnsureDeleted();
+            //        context.Database.EnsureCreated();
+            //        context.Database.Migrate();
+            //        context.EnsureSeedData();
+            //    }
+            //}
 
             app.UseMvc();
         }

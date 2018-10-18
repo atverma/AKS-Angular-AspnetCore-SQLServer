@@ -21,8 +21,16 @@ namespace SampleWebApp.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        [Route("ABC")]
+        public ActionResult<string> GetABC()
+        {
+            return "Test: " + _appSettings.Value.DatabaseConnectionString + " - Test 2: " + Environment.GetEnvironmentVariable("DatabaseConnectionString");
+        }
+
         // GET api/values
         [HttpGet]
+        [Route("Default")]
         public async Task<ActionResult<IEnumerable<string>>> Get()
         {
             using (_context)
