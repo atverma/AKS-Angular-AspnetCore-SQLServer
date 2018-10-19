@@ -17,15 +17,37 @@ namespace SampleWebApp
             CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                   .ConfigureAppConfiguration((hostingContext, config) =>
-                   {
-                       var env = hostingContext.HostingEnvironment;
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) => WebHost.CreateDefaultBuilder(args)
+           .ConfigureAppConfiguration((hostingContext, config) =>
+           {
+               var env = hostingContext.HostingEnvironment;
 
-                       config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                               .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
-                   })
-                .UseStartup<Startup>();
+               if (env.IsDevelopment())
+               {
+                   config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: false, reloadOnChange: true)
+                        .AddEnvironmentVariables();
+               }
+               else
+               {
+                   config.AddJsonFile("SampleWebApp/appsettings.json", optional: false, reloadOnChange: true)
+                        .AddJsonFile($"SampleWebApp/appsettings.{env.EnvironmentName}.json", optional: false, reloadOnChange: true)
+                        .AddJsonFile("/app/AppConfig.json", optional: false, reloadOnChange: true)
+                        .AddEnvironmentVariables();
+               }
+
+               IConfiguration configInProgress = config.Build();
+
+               if (Convert.ToBoolean(configInProgress["AppConfiguration:IsVaultEnabled"]))
+               {
+                   // Read Key Vault settings from appsettings
+                   config.AddAzureKeyVault(configInProgress["AppConfiguration:Vault"],
+                                            configInProgress["AppConfiguration:ClientId"],
+                                            configInProgress["AppConfiguration:ClientSecret"]);
+
+                   config.Build();
+               }
+
+           }).UseStartup<Startup>();
     }
 }

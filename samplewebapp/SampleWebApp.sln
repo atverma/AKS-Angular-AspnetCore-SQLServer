@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", 
 	ProjectSection(SolutionItems) = preProject
 		Kubernetes\Kubernetes_Service.yaml = Kubernetes\Kubernetes_Service.yaml
 		Kubernetes\Kubernetes_Deployment.yaml = Kubernetes\Kubernetes_Deployment.yaml
+		Kubernetes\Kubernetes_ConfigMap.yaml = Kubernetes\Kubernetes_ConfigMap.yaml
+		Kubernetes\Kubernetes_Deployment_V2.yaml = Kubernetes\Kubernetes_Deployment_V2.yaml
 	EndProjectSection
 EndProject
 Global

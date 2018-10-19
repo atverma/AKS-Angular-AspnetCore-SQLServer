@@ -1,0 +1,22 @@
+﻿apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: samplewebapp-configmap-1
+  namespace: default
+data:
+  DatabaseConnectionStringFromKubernetesEnvVariable: DatabaseConnectionStringFromKubernetesEnvVariableValue
+  
+---
+  
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: samplewebapp-configmap-2
+  namespace: default
+data:
+  AppConfig.json: |-
+    {
+        "AppConfiguration": {
+            "DatabaseConnectionStringFromKubernetesMountedFile": "DatabaseConnectionStringFromKubernetesMountedFileValue"
+        }
+    }

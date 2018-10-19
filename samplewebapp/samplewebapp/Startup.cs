@@ -36,6 +36,7 @@ namespace SampleWebApp
             });
 
             services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"));
+            services.Configure<AppConfiguration>(Configuration);
 
             services.AddTransient<IUserContext, UserContext>();
 
