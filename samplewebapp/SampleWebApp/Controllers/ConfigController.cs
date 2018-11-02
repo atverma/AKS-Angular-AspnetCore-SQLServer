@@ -2,25 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
 namespace SampleWebApp.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ConfigController : ControllerBase
     {
         private readonly UserContext _context;
-        private IOptions<AppConfiguration> _appSettings;
+        private IOptionsSnapshot<AppConfiguration> _appSettings;
 
-        public ConfigController(IOptions<AppConfiguration> appSettings, UserContext context)
+        public ConfigController(IOptionsSnapshot<AppConfiguration> appSettings, UserContext context)
         {
             _appSettings = appSettings;
             _context = context;
         }
 
-        // GET: api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
