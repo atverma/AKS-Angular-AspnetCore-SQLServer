@@ -17,7 +17,7 @@ namespace SampleWebApp
     public class Startup
     {
         const string SignalRHub = "/api/SignalRHub";
-        readonly SingalRConfigMode SingalRConfigMode = SingalRConfigMode.None;
+        readonly SignalRConfigMode SingalRConfigMode = SignalRConfigMode.None;
 
         public Startup(IConfiguration configuration)
         {
@@ -64,16 +64,16 @@ namespace SampleWebApp
 
             switch (SingalRConfigMode)
             {
-                case SingalRConfigMode.None:
+                case SignalRConfigMode.None:
                     // SignalR is disabled
                     break;
-                case SingalRConfigMode.ASPNetCoreSignalR:
+                case SignalRConfigMode.ASPNetCoreSignalR:
                     services.AddSignalR(options =>
                     {
                         options.EnableDetailedErrors = true;
                     });
                     break;
-                case SingalRConfigMode.AzureSignalRService:
+                case SignalRConfigMode.AzureSignalRService:
                     // Azure SignalR Service Scaleout
                     services.AddSignalR(options =>
                     {
@@ -83,7 +83,7 @@ namespace SampleWebApp
                         configure.ConnectionString = AzureSignalRConnectionString;
                     });
                     break;
-                case SingalRConfigMode.Redis:
+                case SignalRConfigMode.Redis:
                     // Redis Scaleout however needs Sticky session
                     services.AddSignalR(options =>
                     {
@@ -161,23 +161,23 @@ namespace SampleWebApp
 
             switch (SingalRConfigMode)
             {
-                case SingalRConfigMode.None:
+                case SignalRConfigMode.None:
                     // SignalR is disabled
                     break;
-                case SingalRConfigMode.ASPNetCoreSignalR:
+                case SignalRConfigMode.ASPNetCoreSignalR:
                     app.UseSignalR((options) =>
                     {
                         options.MapHub<NotificationHub>(SignalRHub);
                     });
                     break;
-                case SingalRConfigMode.AzureSignalRService:
+                case SignalRConfigMode.AzureSignalRService:
                     // AZURE SignalR Scaleout
                     app.UseAzureSignalR((options) =>
                     {
                         options.MapHub<NotificationHub>(SignalRHub);
                     });
                     break;
-                case SingalRConfigMode.Redis:
+                case SignalRConfigMode.Redis:
                     // Redis Scaleout
                     app.UseSignalR((options) =>
                     {

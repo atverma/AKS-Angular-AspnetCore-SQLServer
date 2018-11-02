@@ -1,7 +1,7 @@
 ﻿using System;
 namespace SampleWebApp
 {
-    public enum SingalRConfigMode
+    public enum SignalRConfigMode
     {
         None = 0,
         ASPNetCoreSignalR = 1,
