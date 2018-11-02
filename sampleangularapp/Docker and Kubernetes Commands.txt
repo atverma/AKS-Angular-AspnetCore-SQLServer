@@ -8,11 +8,11 @@ Steps to pubish Docker Image:
 
 3. Tag Docker Image: Please update xyz/sampleangularapp with name of your docker repository.
 
-           docker tag sampleangularapp atverma/sampleangularapp
+           docker tag sampleangularapp xyz/sampleangularapp
 
 4. Publish to Docker Hub: Please update xyz/sampleangularapp with name of yur docker repository.
 
-            docker push atverma/sampleangularapp
+            docker push xyz/sampleangularapp
 
 5. Update docker image path in Kubernetes_Deployment.yaml to
 

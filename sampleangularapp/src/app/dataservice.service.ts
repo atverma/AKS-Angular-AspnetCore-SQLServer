@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Config } from './config/config';
 
@@ -15,6 +15,6 @@ export class DataserviceService {
   }
 
   private getApiUrl() {
-    return this.config.get().API_URL;
-}
+        return this.config.get().API_URL;
+      }
 }

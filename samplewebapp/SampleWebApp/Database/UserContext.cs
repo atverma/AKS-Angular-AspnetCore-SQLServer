@@ -9,9 +9,10 @@ public interface IUserContext
 
 public class UserContext : DbContext, IUserContext
 {
-    IOptions<AppConfiguration> _appSettings;
+    IOptionsSnapshot<AppConfiguration> _appSettings;
 
-    public UserContext(DbContextOptions options, IOptions<AppConfiguration> appSettings) : base(options)
+
+    public UserContext(DbContextOptions options, IOptionsSnapshot<AppConfiguration> appSettings) : base(options)
     {
         _appSettings = appSettings;
     }

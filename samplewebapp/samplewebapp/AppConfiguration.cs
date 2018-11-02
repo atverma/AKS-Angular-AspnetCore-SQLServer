@@ -59,4 +59,28 @@
         get;
         set;
     }
+
+    public string TenantId
+    {
+        get;
+        set;
+    }
+
+    public string Audience
+    {
+        get;
+        set;
+    }
+
+    public string AzureSignalRConnectionString
+    {
+        get;
+        set;
+    }
+
+    public string RedisConnectionString
+    {
+        get;
+        set;
+    }
 }
