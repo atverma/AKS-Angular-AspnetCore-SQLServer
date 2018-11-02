@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter, OnDestroy } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { HubConnection } from '@aspnet/signalr';
+import { HubConnection, IHttpConnectionOptions } from '@aspnet/signalr';
 import * as signalR from '@aspnet/signalr';
 import { Observable, throwError } from 'rxjs';
 import { SignalRConnectionInfo } from './signalRConnectionInfo';
@@ -9,8 +9,8 @@ import { Config } from './config/config';
 @Injectable({
     providedIn: 'root'
 })
-export class SignalRFuncService implements OnDestroy {
-    private hubConnection: HubConnection;
+export class SignalRFuncService {
+    hubConnection: HubConnection;
     messageReceived = new EventEmitter<string>();
 
     constructor(private http: HttpClient, private config: Config) {
@@ -27,38 +27,37 @@ export class SignalRFuncService implements OnDestroy {
                 accessTokenFactory: () => info.accessToken
             };
 
-            this.hubConnection = new signalR.HubConnectionBuilder()
-                .withUrl(info.url, options)
-                .configureLogging(signalR.LogLevel.Information)
-                .build();
-
+            this.createConnection(info.url, options);
             this.startConnection();
-
-            this.hubConnection.on('sendMessage', (data: any) => {
-                this.messageReceived.emit('MessageNotification - Function: ' + data);
-            });
-
-            this.hubConnection.onclose(err => {
-                console.log('Retrying connection ...');
-                setTimeout(() => {
-                    this.init();
-                }, 5000);
-            });
         },
-            error => {
-                console.error(`An error occurred: ${error}`);
-                console.log('Retrying connection ...');
-                setTimeout(() => {
-                    this.init();
-                }, 5000);
-            });
+        error => {
+            console.error(`An error occurred during init: ${error}`);
+            console.log('Retrying connection to Azure Function - SignalR Hub ...');
+            setTimeout(() => {
+                this.init();
+            }, 10000);
+        });
+    }
+
+    private createConnection(url: string, options: IHttpConnectionOptions) {
+        this.hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl(url, options)
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
+
+        this.hubConnection.onclose(err => {
+            console.log('Azure Function - SignalR Hub connection closed.');
+            this.stopHubAndunSubscribeToServerEvents();
+            this.restartConnection(err);
+        });
     }
 
     private startConnection(): void {
         this.hubConnection
             .start()
             .then(() => {
-                console.log('Func Hub connection started');
+                console.log('Azure Function - SignalR Hub connection started.');
+                this.subscribeToServerEvents();
             })
             .catch(err => {
                 this.restartConnection(err);
@@ -67,27 +66,29 @@ export class SignalRFuncService implements OnDestroy {
 
     private restartConnection(err: Error): void {
         console.log(`Error ${err}`);
-        console.log('Retrying connection ...');
+        console.log('Retrying connection to Azure Function - SignalR Hub ...');
 
         setTimeout(() => {
             this.startConnection();
-        }, 5000);
+        }, 10000);
     }
 
     send(message: string) {
         const requestUrl = `${this.config.get().FUNCTION_APP_URL}sendmessage`;
         this.http.post(requestUrl, message).subscribe(
-            (data: any) => console.log(`Func Hub send Message: ${message}`),
-            error => console.error(`An error occurred: ${error}`)
+            (data: any) => console.log(`Func Hub sendMessage: ${message}`),
+            error => console.error(`An error occurred in sendMessage: ${error}`)
         );
     }
 
-    private unSubscribeToServerEvents(): void {
-        this.hubConnection.off('sendMessage');
+    private subscribeToServerEvents(): void {
+        this.hubConnection.on('sendMessage', (data: any) => {
+            this.messageReceived.emit('MessageNotification - Function: ' + data);
+        });
     }
 
-    ngOnDestroy(): void {
-        this.unSubscribeToServerEvents();
+    private stopHubAndunSubscribeToServerEvents(): void {
+        this.hubConnection.off('sendMessage');
         this.hubConnection.stop().then(() => console.log('Hub connection stopped'));
     }
 }

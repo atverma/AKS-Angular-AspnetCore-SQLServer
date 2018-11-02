@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
         this.messages.push(message);
       });
     } else {
-      throw new Error('Access token does not exist for todo app.');
+      throw new Error('Access token is not valid.');
     }
   }
 
