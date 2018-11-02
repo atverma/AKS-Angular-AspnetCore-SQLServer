@@ -14,7 +14,7 @@
     </tr>
     <tr>
         <th>
-            <label>Send Message (ASP.NET SignalR):
+            <label>Send Message (ASP.NET Core SignalR):
                 <input style="width:100% !important;" type="text" name="input" placeholder="Enter Message using ASP.NET Core SignalR" [(ngModel)]="messageSignalR">
                 <button (click)="sendMessage()">Send Message</button>
             </label>
@@ -22,8 +22,8 @@
     </tr>
     <tr>
         <th>
-            <label>Send Message (Azure SignalR | Azure Functions 2.0):
-                <input style="width:100% !important;" type="text" name="input" placeholder="Enter message using Azure SignalR | Azure Functions 2.0" [(ngModel)]="messageSignalRFunc">
+            <label>Send Message (Azure SignalR Service | Azure Functions 2.0):
+                <input style="width:100% !important;" type="text" name="input" placeholder="Enter message using Azure Functions 2.0" [(ngModel)]="messageSignalRFunc">
                 <button (click)="sendMessageToFunc()">Send Message</button>
             </label>
         </th>
