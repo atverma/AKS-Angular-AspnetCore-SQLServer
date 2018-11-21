@@ -13,14 +13,18 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        return from(this.inj.getAccessTokenFromCache())
-            .pipe((switchMap(token => {
-                req = req.clone({
-                    setHeaders: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-                return next.handle(req);
-            })));
+        if (this.inj != null && this.inj.getAccessTokenFromCache() != null) {
+            const token = 'Bearer ' + this.inj.getAccessTokenFromCache();
+
+            req = req.clone({
+              setHeaders: {
+                'Content-Type': 'application/json; charset=utf-8',
+                'Accept': 'application/json',
+                'Authorization': token
+              },
+            });
+          }
+
+          return next.handle(req);
     }
 }
