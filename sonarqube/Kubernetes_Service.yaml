@@ -1,0 +1,14 @@
+﻿apiVersion: v1
+kind: Service
+metadata:
+  name: sonar-svc
+  labels:
+    name: sonar-svc
+spec:
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 9000
+  selector:
+    app: sonar-deployment

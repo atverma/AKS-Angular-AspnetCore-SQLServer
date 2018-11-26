@@ -1,0 +1,61 @@
+﻿apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sonar-deployment
+  labels:
+    app: sonar-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sonar-deployment
+    spec:
+      terminationGracePeriodSeconds: 15
+      initContainers:
+      - name: fix-the-volume-permission
+        image: busybox
+        command:
+        - sh
+        - -c
+        - chown -R 1000:1000 /opt/sonarqube/extensions
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: sonarqube-data
+          mountPath: /opt/sonarqube/extensions
+      - name: fix-the-volume-permission1
+        image: busybox
+        command:
+        - sh
+        - -c
+        - chown -R 1000:1000 /opt/sonarqube/data
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: sonarqube-data
+          mountPath: /opt/sonarqube/data
+      containers:
+      - name: sonarqube
+        image: sonarqube
+        ports:
+        - name: sonarqube
+          containerPort: 9000
+        env:
+        - name: SONARQUBE_JDBC_USERNAME
+          value: sonar
+        - name: SONARQUBE_JDBC_PASSWORD
+          value: SONAR_SQL_LOGIN_PASSWORD
+        - name: SONARQUBE_JDBC_URL 
+          value: jdbc:sqlserver://mssql-deployment:1433;databaseName=sonardb;user=sonar;password=SONAR_SQL_LOGIN_PASSWORD
+        volumeMounts:
+         - name: sonarqube-data
+           mountPath: /opt/sonarqube/extensions
+           subPath: extensions
+         - name: sonarqube-data
+           mountPath: /opt/sonarqube/data
+           subPath: data
+      volumes:
+      - name: sonarqube-data
+        persistentVolumeClaim:
+           claimName: sonar-data-claim
