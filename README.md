@@ -32,3 +32,10 @@ Azure Key Vault Secrets
 
 You can read in detail by going through this article 
 https://blogs.msdn.microsoft.com/atverma/2018/10/19/asp-net-core-2-1-web-api-load-app-configuration-from-appsettings-json-dockerfile-environment-variables-azure-key-vault-secrets-and-kubernetes-configmaps-secrets/
+
+# Add real-time web functionality to Angular application using ASP.NET Core SignalR, Azure SignalR service and Azure SignalR Service bindings for Azure Functions 2.0
+
+https://blogs.msdn.microsoft.com/atverma/2018/11/02/add-real-time-web-functionality-to-angular-application-using-asp-net-core-signalr-azure-signalr-service-and-azure-signalr-service-bindings-for-azure-functions-2-0/
+
+# Deploy SonarQube to Azure Kubernetes Service cluster and integrate with Azure DevOps build pipeline
+https://blogs.msdn.microsoft.com/atverma/2018/11/26/deploy-sonarqube-to-azure-kubernetes-service-cluster-and-integrate-with-azure-devops-build-pipeline/
