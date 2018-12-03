@@ -19,7 +19,7 @@ The components and steps needed to deploy these to AKS are
   ◦ Publish docker image to Docker Hub
   ◦ Deploy to AKS
 
-You can read in detail by going through this article https://blogs.msdn.microsoft.com/atverma/2018/09/16/azure-kubernetes-service-aks-deploying-angular-asp-net-core-and-sql-server-on-linux/
+You can read in detail by going through this article https://www.appdevmusings.com/azure-kubernetes-service-aks-deploying-angular-asp-net-core-and-sql-server-on-linux/
 
 # Multiple ways to load App configuration in ASP.net Core Web API
 
@@ -31,11 +31,11 @@ Populate Volume (Config file) with data stored in a ConfigMap/Secret
 Azure Key Vault Secrets
 
 You can read in detail by going through this article 
-https://blogs.msdn.microsoft.com/atverma/2018/10/19/asp-net-core-2-1-web-api-load-app-configuration-from-appsettings-json-dockerfile-environment-variables-azure-key-vault-secrets-and-kubernetes-configmaps-secrets/
+https://www.appdevmusings.com/asp-net-core-2-1-web-api-load-app-configuration-from-appsettings-json-dockerfile-environment-variables-azure-key-vault-secrets-and-kubernetes-configmaps-secrets/
 
 # Add real-time web functionality to Angular application using ASP.NET Core SignalR, Azure SignalR service and Azure SignalR Service bindings for Azure Functions 2.0
 
-https://blogs.msdn.microsoft.com/atverma/2018/11/02/add-real-time-web-functionality-to-angular-application-using-asp-net-core-signalr-azure-signalr-service-and-azure-signalr-service-bindings-for-azure-functions-2-0/
+https://www.appdevmusings.com/add-real-time-web-functionality-to-angular-application-using-asp-net-core-signalr-azure-signalr-service-and-azure-signalr-service-bindings-for-azure-functions-2-0/
 
 # Deploy SonarQube to Azure Kubernetes Service cluster and integrate with Azure DevOps build pipeline
-https://blogs.msdn.microsoft.com/atverma/2018/11/26/deploy-sonarqube-to-azure-kubernetes-service-cluster-and-integrate-with-azure-devops-build-pipeline/
+https://www.appdevmusings.com/deploy-sonarqube-to-azure-kubernetes-service-cluster-and-integrate-with-azure-devops-build-pipeline/
