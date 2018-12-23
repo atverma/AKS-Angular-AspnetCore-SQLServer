@@ -39,3 +39,12 @@ https://www.appdevmusings.com/add-real-time-web-functionality-to-angular-applica
 
 # Deploy SonarQube to Azure Kubernetes Service cluster and integrate with Azure DevOps build pipeline
 https://www.appdevmusings.com/deploy-sonarqube-to-azure-kubernetes-service-cluster-and-integrate-with-azure-devops-build-pipeline/
+
+# Host your ASP.NET Core 2.2 Web App with IIS (in-process and out-of-process hosting model) and deploy to Docker Windows Containers
+https://appdevmusings.com/host-your-asp-net-core-2-2-web-app-with-iis-in-process-and-out-of-process-hosting-model-and-deploy-to-docker-windows-containers/
+ 
+One of the new features of ASP.NET Core 2.2 is support for hosting ASP.NET Core Web App with IIS using in-process or out-of-process hosting model. This article will cover steps needed to
+
+- Host ASP.NET Core 2.2 Web API with IIS using in-process hosting model
+- Host ASP.NET Core 2.2 Web API with IIS using out-of-process hosting model
+- Host ASP.NET Core 2.2 Web API in Docker Windows containers (with IIS)
