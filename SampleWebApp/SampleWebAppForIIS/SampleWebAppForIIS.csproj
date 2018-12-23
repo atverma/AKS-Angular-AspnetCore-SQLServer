@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.0.2105168" />
+  </ItemGroup>
+
+  <Target Name="CreateLogsFolder" AfterTargets="Publish">
+    <MakeDir Directories="$(PublishDir)Logs"
+             Condition="!Exists('$(PublishDir)Logs')" />
+    <WriteLinesToFile File="$(PublishDir)Logs\.log"
+                      Lines="Generated file"
+                      Overwrite="True"
+                      Condition="!Exists('$(PublishDir)Logs\.log')" />
+  </Target>
+</Project>
