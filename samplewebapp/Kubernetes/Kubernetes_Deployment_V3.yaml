@@ -1,4 +1,4 @@
-﻿apiVersion: apps/v1beta1
+apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: samplewebapp
@@ -19,7 +19,25 @@ spec:
       containers:
       - name: samplewebapp
         image: YOUR_DOCKER_IMAGE
-        resources: {}
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 80
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        resources:
+          limits:
+            cpu: 500m
+            memory: 0.5Gi
+          requests:
+            cpu: 100m
+            memory: 0.5Gi
         terminationMessagePath: "/dev/termination-log"
         terminationMessagePolicy: File
         imagePullPolicy: Always

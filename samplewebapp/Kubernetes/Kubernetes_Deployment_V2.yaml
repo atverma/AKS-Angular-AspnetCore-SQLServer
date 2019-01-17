@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: samplewebapp
-        image: atverma/samplewebapp
+        image: YOUR_DOCKER_IMAGE
         env:
         - name: DatabaseConnectionStringFromKubernetesEnvVariable
           valueFrom:
