@@ -29,6 +29,10 @@ namespace SampleWebAppWithHealthchecks
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddHostedService<StartupHostedService>();
+            services.AddSingleton<ReadinessHealthCheck>();
+            services.AddSingleton<LivenessHealthCheck>();
+            
             services.AddHealthChecks()
             .AddLivenessHealthCheck("Liveness", HealthStatus.Unhealthy, new List<string>(){"Liveness"})
             .AddReadinessHealthCheck("Readiness", HealthStatus.Unhealthy, new List<string>{ "Readiness" });
@@ -49,7 +53,7 @@ namespace SampleWebAppWithHealthchecks
 
             app.UseHealthChecks("/health/live", new HealthCheckOptions()
             {
-                Predicate = check => (check.Name == "Liveness")
+                Predicate = check => check.Name == "Liveness"
             })
             .UseHealthChecks("/health/ready", new HealthCheckOptions()
             {

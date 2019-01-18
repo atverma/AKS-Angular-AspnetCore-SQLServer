@@ -12,11 +12,10 @@ namespace SampleWebAppWithHealthchecks
             HealthStatus? failureStatus,
             IEnumerable<string> tags)
         {
-            return builder.Add(new HealthCheckRegistration(
+            return builder.AddCheck<LivenessHealthCheck>(
                 name,
-                instance => new LivenessHealthCheck(),
                 failureStatus,
-                tags));
+                tags);
         }
 
         public static IHealthChecksBuilder AddReadinessHealthCheck(
@@ -25,11 +24,10 @@ namespace SampleWebAppWithHealthchecks
             HealthStatus? failureStatus,
             IEnumerable<string> tags)
         {
-            return builder.Add(new HealthCheckRegistration(
+            return builder.AddCheck<ReadinessHealthCheck>(
                 name,
-                instance => new ReadinessHealthCheck(),
                 failureStatus,
-                tags));
+                tags);
         }
     }
 }

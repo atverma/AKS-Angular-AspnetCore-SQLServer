@@ -7,14 +7,14 @@ namespace SampleWebAppWithHealthchecks
 {
     internal class LivenessHealthCheck : IHealthCheck
     {
-        internal LivenessHealthCheck()
+        public LivenessHealthCheck()
         {
         }
 
         public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Some Liveness check
-            Console.WriteLine("LivenessHealthCheck executed.");
+            Console.WriteLine("Liveness Health check executed.");
             return Task.FromResult(HealthCheckResult.Healthy());
         }
     }

@@ -24,13 +24,13 @@ spec:
             path: /health/ready
             port: 80
           initialDelaySeconds: 5
-          periodSeconds: 5
+          periodSeconds: 30
         livenessProbe:
           httpGet:
             path: /health/live
             port: 80
-          initialDelaySeconds: 3
-          periodSeconds: 3
+          initialDelaySeconds: 30
+          periodSeconds: 30
         resources:
           limits:
             cpu: 500m
