@@ -13,11 +13,7 @@
   </ItemGroup>
 
   <Target Name="CreateLogsFolder" AfterTargets="Publish">
-    <MakeDir Directories="$(PublishDir)Logs"
-             Condition="!Exists('$(PublishDir)Logs')" />
-    <WriteLinesToFile File="$(PublishDir)Logs\.log"
-                      Lines="Generated file"
-                      Overwrite="True"
-                      Condition="!Exists('$(PublishDir)Logs\.log')" />
+    <MakeDir Directories="$(PublishDir)Logs" Condition="!Exists('$(PublishDir)Logs')" />
+    <WriteLinesToFile File="$(PublishDir)Logs\.log" Lines="Generated file" Overwrite="True" Condition="!Exists('$(PublishDir)Logs\.log')" />
   </Target>
 </Project>

@@ -24,13 +24,17 @@ spec:
             path: /health/ready
             port: 80
           initialDelaySeconds: 5
-          periodSeconds: 30
+          periodSeconds: 5
+          failureThreshold: 3
+          successThreshold: 2
         livenessProbe:
           httpGet:
             path: /health/live
             port: 80
           initialDelaySeconds: 30
           periodSeconds: 30
+          failureThreshold: 3
+          successThreshold: 1
         resources:
           limits:
             cpu: 500m
