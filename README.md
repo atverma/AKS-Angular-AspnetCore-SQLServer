@@ -48,3 +48,10 @@ One of the new features of ASP.NET Core 2.2 is support for hosting ASP.NET Core 
 - Host ASP.NET Core 2.2 Web API with IIS using in-process hosting model
 - Host ASP.NET Core 2.2 Web API with IIS using out-of-process hosting model
 - Host ASP.NET Core 2.2 Web API in Docker Windows containers (with IIS)
+
+# Configure Kubernetes Liveness and Readiness probes for ASP.NET Core 2.2 web application using Health checks
+https://appdevmusings.com/configure-kubernetes-liveness-and-readiness-probes-for-asp-net-core-2-2-web-application-using-health-checks/
+
+Health checks API is one of the new features of ASP.NET Core 2.2 for application health monitoring. Health checks are exposed by ASP.NET Core 2.2 application as HTTP endpoints which enables liveness and readiness probes.
+
+Health checks are usually used with an external monitoring service or container orchestrator to check the status of an app. In this article, I am going to share steps needed to configure Kubernetes Liveness and Readiness probes for an ASP.NET Core 2.2 web application deployed in Azure Kubernetes Service cluster.
