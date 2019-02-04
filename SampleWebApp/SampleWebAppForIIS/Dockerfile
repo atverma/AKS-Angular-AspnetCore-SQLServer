@@ -1,17 +1,13 @@
 # escape=`
 FROM microsoft/iis as base
+
 ## Install dotnet 2.2.0 hosting pack
-SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
-RUN `
-  New-Item -Type Directory C:\Setup | Out-Null ; `
-  Invoke-WebRequest 'https://download.visualstudio.microsoft.com/download/pr/48adfc75-bce7-4621-ae7a-5f3c4cf4fc1f/9a8e07173697581a6ada4bf04c845a05/dotnet-hosting-2.2.0-win.exe' -UserAgent '' -OutFile C:/setup/dotnet-hosting-2.2.0-win.exe ; `
-  $process = start-process -Filepath C:/setup/dotnet-hosting-2.2.0-win.exe -ArgumentList  @('/install', '/q', '/norestart') -Wait -PassThru ; `
-  `
-  if ($process.ExitCode -ne 0) { `
-    exit $process.ExitCode ; `
-  } `
-  Remove-Item -Force C:/setup/dotnet-hosting-2.2.0-win.exe
+SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'Continue'; $verbosePreference='Continue';"]
+ADD https://download.visualstudio.microsoft.com/download/pr/48adfc75-bce7-4621-ae7a-5f3c4cf4fc1f/9a8e07173697581a6ada4bf04c845a05/dotnet-hosting-2.2.0-win.exe "C:/setup/dotnet-hosting-2.2.0-win.exe"
+RUN start-process -Filepath "C:/setup/dotnet-hosting-2.2.0-win.exe" -ArgumentList @('/install', '/quiet', '/norestart') -Wait 
+RUN Remove-Item -Force "C:/setup/dotnet-hosting-2.2.0-win.exe"
 ## End Install dotnet 2.2.0 hosting pack
+
 ## Build and Publish Web App
 FROM microsoft/dotnet:2.2-sdk-nanoserver-1803 AS build
 WORKDIR /src
