@@ -9,7 +9,7 @@ RUN Remove-Item -Force "C:/setup/dotnet-hosting-2.2.0-win.exe"
 ## End Install dotnet 2.2.0 hosting pack
 
 ## Build and Publish Web App
-FROM microsoft/dotnet:2.2-sdk-nanoserver-1803 AS build
+FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src
 COPY ["SampleWebAppForIIS/SampleWebAppForIIS.csproj", "SampleWebAppForIIS/"]
 RUN dotnet restore "SampleWebAppForIIS/SampleWebAppForIIS.csproj"
