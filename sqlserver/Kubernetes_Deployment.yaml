@@ -17,7 +17,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 10
       containers:
-      - image: microsoft/mssql-server-linux
+      - image: mcr.microsoft.com/mssql/server:2019-latest
         name: mssql
         ports:
         - containerPort: 1433
