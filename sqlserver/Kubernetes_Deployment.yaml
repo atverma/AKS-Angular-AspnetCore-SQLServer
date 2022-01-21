@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        app: mssql-sample
+        app: mssql-sample-deployment
         tier: database
     spec:
       terminationGracePeriodSeconds: 10
