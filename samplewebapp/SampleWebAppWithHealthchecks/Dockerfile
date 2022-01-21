@@ -1,8 +1,8 @@
-FROM mcr.microsoft.com/dotnet/aspnet:2.2.105 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:2.2.3 AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/sdk:2.2.105 AS build
+FROM mcr.microsoft.com/dotnet/sdk:2.2.3 AS build
 WORKDIR /src
 
 COPY ["SampleWebAppWithHealthchecks.csproj", "SampleWebAppWithHealthchecks/"]
