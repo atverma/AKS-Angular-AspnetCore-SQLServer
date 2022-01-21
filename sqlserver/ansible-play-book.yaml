@@ -1,0 +1,40 @@
+---
+- hosts: PROD
+  become: yes 
+  tasks: 
+    - name: send resources to k8s host
+      become_user: root
+      copy: src={{ item.src }} dest={{ item.dest }}
+      with_items:
+        - { src: '/var/lib/jenkins/workspace/P12-gitlab-jenkins-k8s-ingress-BE-ASP.NET-FE-Angular/sqlserver', dest: '/home/ubuntu/jenkins/projet12' }
+  
+    - name:  create Persistance Volume
+      become: yes
+      become_user: ubuntu
+      shell: kubectl apply -f /home/ubuntu/jenkins/projet12/sqlserver/sqlserver-pv.yml 
+      register: kubernetes_join_command
+      
+       
+    - name:  create Persistance Volume Claim
+      become: yes
+      become_user: ubuntu
+      shell: kubectl apply -f /home/ubuntu/jenkins/projet12/sqlserver/Kubernetes-PersistentStorage.yaml 
+      register: kubernetes_join_command
+      
+    - name:  Create a Kubernetes Secret
+      become: yes
+      become_user: ubuntu
+      shell: kubectl apply -f /home/ubuntu/jenkins/projet12/sqlserver/Kubernetes_Secret.yaml 
+      register: kubernetes_join_command
+ 
+    - name:  Create a Kubernetes Service
+      become: yes
+      become_user: ubuntu
+      shell: kubectl apply -f /home/ubuntu/jenkins/projet12/sqlserver/Kubernetes_Service.yaml 
+      register: kubernetes_join_command
+      
+    - name:  Create a Deployment
+      become: yes
+      become_user: ubuntu
+      shell: kubectl apply -f /home/ubuntu/jenkins/projet12/sqlserver/Kubernetes_Deployment.yaml 
+      register: kubernetes_join_command
