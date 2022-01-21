@@ -1,4 +1,4 @@
-﻿apiVersion: apps/v1beta1
+﻿apiVersion: v1
 kind: Deployment
 metadata:
   name: mssql-sample-deployment
