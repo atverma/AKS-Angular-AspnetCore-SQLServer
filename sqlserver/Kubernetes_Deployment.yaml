@@ -3,6 +3,10 @@ kind: Deployment
 metadata:
   name: mssql-sample-deployment
 spec:
+  selector:  
+    matchLabels:
+      app: mssql-sample
+      tier: database
   replicas: 1
   template:
     metadata:
