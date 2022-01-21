@@ -7,7 +7,7 @@ ENV DatabaseConnectionStringFromDockerEnvVariable $dbConnectionString
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["SampleWebApp/SampleWebApp.csproj", "."]
+COPY ["sampleWebApp/SampleWebApp.csproj", "."]
 RUN dotnet restore "SampleWebApp.csproj"
 COPY . .
 RUN dotnet build "SampleWebApp.csproj" -c Release -o /app
