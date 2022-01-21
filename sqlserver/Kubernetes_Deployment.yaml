@@ -5,13 +5,13 @@ metadata:
 spec:
   selector:  
     matchLabels:
-      app: mssql-sample
+      app: mssql-sample-deployment
       tier: database
   replicas: 1
   template:
     metadata:
       labels:
-        app: mssql-sample
+        app: mssql-sample-deployment
     spec:
       terminationGracePeriodSeconds: 10
       containers:
