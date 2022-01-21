@@ -1,10 +1,15 @@
 apiVersion: v1
-kind: PersistentVolumeClaim
+kind: PersistentVolume
 metadata:
-  name: mssql-sample-data-claim
+  name: mssql-sample-data
+  labels:
+    app: sqlserver
+    tier: database
 spec:
+  storageClassName: manual
+  capacity:
+    storage: 256Mi
   accessModes:
-  - ReadWriteOnce
-  resources:
-   requests:
-    storage: 5Gi
+    - ReadWriteOnce
+  hostPath:
+          path: "/home/ubuntu/jenkins/sqlserver"
