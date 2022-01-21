@@ -1,11 +1,11 @@
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:2.1 AS base
 WORKDIR /app
 EXPOSE 80
 
 ARG dbConnectionString
 ENV DatabaseConnectionStringFromDockerEnvVariable $dbConnectionString
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:2.1 AS build
 WORKDIR /src
 COPY ["samplewebapp/SampleWebApp.csproj", "."]
 RUN dotnet restore "SampleWebApp.csproj"
