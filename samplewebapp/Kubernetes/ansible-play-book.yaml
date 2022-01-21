@@ -12,19 +12,19 @@
     - name:  create Config Map
       become: yes
       become_user: ubuntu
-      shell: kubectl apply -f /home/ubuntu/jenkins/projet12/dotnet/Kubernetes/Kubernetes_ConfigMap.yaml
+      shell: kubectl apply -f /home/ubuntu/jenkins/projet12/dotnet/Kubernetes_ConfigMap.yaml
       register: kubernetes_join_command
         
     - name:  create Service
       become: yes
       become_user: ubuntu
-      shell: kubectl apply -f /home/ubuntu/jenkins/projet12/dotnet/Kubernetes/Kubernetes_Service.yaml
+      shell: kubectl apply -f /home/ubuntu/jenkins/projet12/dotnet/Kubernetes_Service.yaml
       register: kubernetes_join_command
         
     - name:  create Deployment
       become: yes
       become_user: ubuntu
-      shell: kubectl apply -f /home/ubuntu/jenkins/projet12/dotnet/Kubernetes/Kubernetes_Deployment_V3.yaml
+      shell: kubectl apply -f /home/ubuntu/jenkins/projet12/dotnet/Kubernetes_Deployment_V3.yaml
       register: kubernetes_join_command
       
       
