@@ -1,0 +1,30 @@
+---
+- hosts: PROD
+  become: yes 
+  tasks: 
+    - name: send resources to k8s host
+      become_user: root
+      copy: src={{ item.src }} dest={{ item.dest }}
+      with_items:
+        - { src: '/var/lib/jenkins/workspace/P12-gitlab-jenkins-k8s-ingress-BE-ASP.NET-FE-Angular/samplewebapp/Kubernetes/', dest: '/home/ubuntu/jenkins/projet12/dotnet' }
+
+
+    - name:  create Config Map
+      become: yes
+      become_user: ubuntu
+      shell: kubectl apply -f /home/ubuntu/jenkins/projet12/dotnet/Kubernetes_ConfigMap.yaml
+      register: kubernetes_join_command
+        
+    - name:  create Service
+      become: yes
+      become_user: ubuntu
+      shell: kubectl apply -f /home/ubuntu/jenkins/projet12/dotnet/Kubernetes_Service.yaml
+      register: kubernetes_join_command
+        
+    - name:  create Deployment
+      become: yes
+      become_user: ubuntu
+      shell: kubectl apply -f /home/ubuntu/jenkins/projet12/dotnet/Kubernetes_Deployment_V3.yaml
+      register: kubernetes_join_command
+      
+      

@@ -1,13 +1,13 @@
-FROM microsoft/dotnet:2.1-aspnetcore-runtime AS base
+FROM mcr.microsoft.com/dotnet/aspnet:2.1 AS base
 WORKDIR /app
 EXPOSE 80
 
 ARG dbConnectionString
 ENV DatabaseConnectionStringFromDockerEnvVariable $dbConnectionString
 
-FROM microsoft/dotnet:2.1-sdk AS build
+FROM mcr.microsoft.com/dotnet/sdk:2.1 AS build
 WORKDIR /src
-COPY ["SampleWebApp/SampleWebApp.csproj", "."]
+COPY ["samplewebapp/SampleWebApp.csproj", "."]
 RUN dotnet restore "SampleWebApp.csproj"
 COPY . .
 RUN dotnet build "SampleWebApp.csproj" -c Release -o /app

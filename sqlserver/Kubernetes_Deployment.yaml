@@ -1,18 +1,24 @@
-﻿apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mssql-sample-deployment
 spec:
-  replicas: 1
+  selector:  
+    matchLabels:
+      app: mssql-sample-deployment
+      tier: database
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
-        app: mssql-sample
+        app: mssql-sample-deployment
+        tier: database
     spec:
       terminationGracePeriodSeconds: 10
       containers:
-      - name: mssql
-        image: microsoft/mssql-server-linux
+      - image: mcr.microsoft.com/mssql/server:2017-CU24-ubuntu-16.04
+        name: mssql
         ports:
         - containerPort: 1433
         env:
